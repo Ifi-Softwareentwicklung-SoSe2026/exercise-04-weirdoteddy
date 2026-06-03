@@ -1,4 +1,3 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=24052416)
 <!--
 
 author:   Volker Göhler
@@ -20,7 +19,7 @@ tags: [ Sommersemester2026, Softwareentwicklung, Übung04]
 
 -->
 
-[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise_04/refs/heads/main/README.md)
+[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise_04-weirdoteddy/refs/heads/main/README.md)
 
 #  Aufgabe 04
 
@@ -423,8 +422,57 @@ Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 
 ```text @plantUML
 @startuml
+package RoboterDatenverwaltung{
 
-Arbeiten Sie hier !!!
+interface ISerializer {
+  + SpeichernAlsJSON(string): void
+  + static {abstract} LadenAusJSON(string): Roboter
+  + SpeichernAlsCSV(string): void
+  + static {abstract} LadenAusCSV(string): Roboter
+}
+
+class Roboter {
+  + name: string
+  + typ: string
+  + energielevel: int
+  + SpeichernAlsCSV(string): void
+  + static LadenAusCSV(string): Roboter
+  + SpeichernAlsJSON(string): void
+  + LadenAusJSON(string): Roboter
+  + virtual GetStatus(): string
+  + virtual Activate(): void
+}
+
+ISerializer <|.. Roboter
+
+class Lieferroboter{
+  + Lieferkapazität: int
+  + override GetStatus(): string
+}
+
+Roboter <|-- Lieferroboter
+
+}
+
+class Program{
+- const ROBOT_DATA_FOLDER: string
+- const ROBOT_COUNT: int
+- static readonly RandomGenerator: Random
+- static readonly StandardTypen: string[]
+
+
++ static Main(string): void
+- static InitialisiereZufaelligeRoboter(int): List<Roboter>
+- static ErzeugeZufaelligenRoboter(int): Roboter
+- static GibStatusAus(IEnumerable<Roboter>): void
+- static SpeichereAlleRoboter(IEnumerable<Roboter>, string): void
+- static RemoveExistingRobots(string): void
+- static LadeAlleCsvRoboter(string): List<Roboter>
+- static LadeAlleJsonRoboter(string): List<Roboter>
+
+}
+
+Program --> RoboterDatenverwaltung : using
 
 @enduml
 ```
