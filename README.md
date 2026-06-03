@@ -437,7 +437,7 @@ class Roboter {
   + energielevel: int
   + SpeichernAlsCSV(string): void
   + static LadenAusCSV(string): Roboter
-  + SpeichernAusJSON(string): void
+  + SpeichernAlsJSON(string): void
   + LadenAusJSON(string): Roboter
   + virtual GetStatus(): string
   + virtual Activate(): void
@@ -457,7 +457,7 @@ Roboter <|-- Lieferroboter
 class Program{
 - const ROBOT_DATA_FOLDER: string
 - const ROBOT_COUNT: int
-- static readonly RandomGenerator(): Random
+- static readonly RandomGenerator: Random
 - static readonly StandardTypen: string[]
 
 
